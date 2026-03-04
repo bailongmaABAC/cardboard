@@ -2024,6 +2024,11 @@ public class CraftServer implements Server {
         }
 
         @Override
+        public YamlConfiguration getPaperConfig() {
+            throw new NoSuchMethodError(); // TODO
+        }
+
+        @Override
         public void restart() {
             // TODO
         }
