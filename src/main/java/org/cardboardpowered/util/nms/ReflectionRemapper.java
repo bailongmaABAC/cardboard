@@ -18,6 +18,7 @@
  */
 package org.cardboardpowered.util.nms;
 
+import org.apache.logging.log4j.LogManager;
 import org.cardboardpowered.CardboardMod;
 import org.cardboardpowered.mohistremap.RemapUtilProvider;
 

@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import org.bukkit.craftbukkit.CraftServer;
 import org.cardboardpowered.CardboardConfig;
 import org.cardboardpowered.CardboardLogger;
 import org.cardboardpowered.mappings.TsrgWriter;
@@ -307,21 +306,20 @@ public class RemapUtils implements IRemapUtils {
 
     }
 
-    public static MappingResolver mr = FabricLoader.getInstance().getMappingResolver(); 
-    
+    public static MappingResolver mr = FabricLoader.getInstance().getMappingResolver();
+
     @Override
     public String map(String typeName) {
-    	
     	// Check if typeName is not in internal class name format
     	boolean isRequestNotInternalName = typeName.indexOf('.') != -1 && typeName.indexOf('/') == -1;
 
         typeName = mapPackage(typeName);
-        String res = jarMapping.classes.getOrDefault(typeName, typeName);
-        
+        String res = jarMapping.classes.getOrDefault(typeName.replace('.', '/'), typeName);
+
         if (cspigot2fabric.containsKey(typeName)) {
         	String csf = cspigot2fabric.get(typeName);
         	if (csf.contains("class_")) {
-        		typeName = csf;
+        		return csf;
         	}
         }
         
@@ -386,7 +384,7 @@ public class RemapUtils implements IRemapUtils {
         if (isRequestNotInternalName) {
         	res = res.replace('/', '.');
     	}
-        
+
         return res; // jarMapping.classes.getOrDefault(typeName, typeName);
     }
 
